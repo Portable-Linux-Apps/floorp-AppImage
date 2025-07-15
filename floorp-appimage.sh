@@ -27,9 +27,9 @@ fi
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
 echo "$VERSION" > ~/version
 
-wget "$tarball_url" -O ./package.tar.$ext
-tar xvf ./package.tar.$ext
-rm -f ./package.tar.$ext
+wget "$tarball_url" -O ./package.tar.xz
+tar xvf ./package.tar.xz
+rm -f ./package.tar.xz
 
 mv -v ./floorp ./AppDir && (
 	cd ./AppDir
