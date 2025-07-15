@@ -9,29 +9,14 @@ UPINFO="gh-releases-zsync|$(echo $GITHUB_REPOSITORY | tr '/' '|')|latest|*$ARCH.
 DESKTOP="https://github.com/flathub/one.ablaze.floorp/raw/refs/heads/master/src/share/applications/one.ablaze.floorp.desktop"
 export URUNTIME_PRELOAD=1 # really needed here
 
-# what mess the repo uses amd64 and arm64 for nightly
-if [ "$ARCH" = 'x86_64' ]; then
-	arch=amd64
-else
-	arch=arm64
-fi
-
-if [ "$DEVEL" = 'true' ]; then
-	ext=xz
-	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$arch.tar.$ext$" | head -1)
-else
-	ext=bz2
-	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$ARCH.tar.$ext$" | head -1)
-fi
-
+tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
+	| grep -oi "https.*linux-amd64.tar.xz" | head -1)
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
 echo "$VERSION" > ~/version
 
-wget "$tarball_url" -O ./package.tar.$ext
-tar xvf ./package.tar.$ext
-rm -f ./package.tar.$ext
+wget "$tarball_url" -O ./package.tar.xz
+tar xvf ./package.tar.xz
+rm -f ./package.tar.xz
 
 mv -v ./floorp ./AppDir && (
 	cd ./AppDir
