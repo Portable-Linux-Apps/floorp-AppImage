@@ -10,7 +10,7 @@ DESKTOP="https://github.com/flathub/one.ablaze.floorp/raw/refs/heads/master/src/
 export URUNTIME_PRELOAD=1 # really needed here
 
 tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-	| grep -oi "https.*linux-$ARCH.tar.xz" | head -1)
+	| grep -oi "https.*linux-amd64.tar.xz" | head -1)
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
 echo "$VERSION" > ~/version
 
