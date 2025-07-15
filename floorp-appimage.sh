@@ -18,10 +18,10 @@ fi
 
 if [ "$DEVEL" = 'true' ]; then
 	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$arch.tar.xz$" | head -1)
+		| grep -oi "https.*linux-$arch.tar.xz" | head -1)
 else
 	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$ARCH.tar.xz$" | head -1)
+		| grep -oi "https.*linux-$ARCH.tar.xz" | head -1)
 fi
 
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
