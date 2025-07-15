@@ -17,13 +17,11 @@ else
 fi
 
 if [ "$DEVEL" = 'true' ]; then
-	ext=xz
 	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$arch.tar.$ext$" | head -1)
+		| grep -oi "https.*linux-$arch.tar.xz$" | head -1)
 else
-	ext=bz2
 	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$ARCH.tar.$ext$" | head -1)
+		| grep -oi "https.*linux-$ARCH.tar.xz$" | head -1)
 fi
 
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
