@@ -9,21 +9,8 @@ UPINFO="gh-releases-zsync|$(echo $GITHUB_REPOSITORY | tr '/' '|')|latest|*$ARCH.
 DESKTOP="https://github.com/flathub/one.ablaze.floorp/raw/refs/heads/master/src/share/applications/one.ablaze.floorp.desktop"
 export URUNTIME_PRELOAD=1 # really needed here
 
-# what mess the repo uses amd64 and arm64 for nightly
-if [ "$ARCH" = 'x86_64' ]; then
-	arch=amd64
-else
-	arch=arm64
-fi
-
-if [ "$DEVEL" = 'true' ]; then
-	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$arch.tar.xz" | head -1)
-else
-	tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
-		| grep -oi "https.*linux-$ARCH.tar.xz" | head -1)
-fi
-
+tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
+	| grep -oi "https.*linux-$ARCH.tar.xz" | head -1)
 export VERSION=$(echo "$tarball_url" | awk -F'/' '{print $(NF-1); exit}')
 echo "$VERSION" > ~/version
 
