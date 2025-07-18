@@ -1,4 +1,7 @@
-# floorp-AppImage
+# floorp-AppImage 🐧
+
+[![GitHub Downloads](https://img.shields.io/github/downloads/Portable-Linux-Apps/floorp-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/Portable-Linux-Apps/floorp-AppImage/releases/latest)
+[![CI Build Status](https://github.com//Portable-Linux-Apps/floorp-AppImage/actions/workflows/blank.yml/badge.svg)](https://github.com/Portable-Linux-Apps/floorp-AppImage/releases/latest)
 
 This repo takes the [official floorp binaries](https://github.com/Floorp-Projects/Floorp/releases) and turns them into an AppImage. 
 
